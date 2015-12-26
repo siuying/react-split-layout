@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import VendorPrefix from 'react-vendor-prefix';
 
 import Pane from './Pane';
 import Divider from './Divider';
@@ -14,8 +13,15 @@ export default class SplitView extends React.Component {
 
   render() {
     const direction = this.props.direction;
-    const children = this.props.children;
+    var children = this.props.children;
     const styles = this.stylesWithDirection(direction);
+
+    for (var i = children.length - 1; i > 0; i--) {
+      children.splice(i, 0, (
+        <Divider key={`divider-${i}`} direction={direction}/>
+      ))
+    }
+    console.log(children)
     return (
       <div style={styles}>
         {children}
@@ -52,7 +58,7 @@ export default class SplitView extends React.Component {
         width: '100%'
       })
     }
-    return VendorPrefix.prefix({style: style}).style;
+    return style;
   }
 }
 

@@ -23,7 +23,6 @@
     "radium": "^0.15.3",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
-    "react-vendor-prefix": "0.0.1",
     "watchify": "^3.6.1"
   },
   "devDependencies": {
