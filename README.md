@@ -1,6 +1,6 @@
 # React Split View
 
-A split view component for React, shows two or more subviews, divided by a draggable divider.
+A split view component for React, shows two or more subviews, separated by a draggable divider.
 
 Heavily inspired by [react-split-pane](https://github.com/tomkp/react-split-pane) by [tomkp](https://github.com/tomkp).
 

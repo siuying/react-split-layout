@@ -1,7 +1,7 @@
 {
   "name": "react-split-view",
   "version": "1.0.0",
-  "description": "Resizable React SplitView component that support multiple children view, divided by a handler.",
+  "description": "A split view component for React, shows two or more subviews, separated by a draggable divider.",
   "main": "index.js",
   "scripts": {
     "compile": "babel -d lib/ src/",
