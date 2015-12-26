@@ -6,7 +6,9 @@ import { Directions } from './Constants';
 export default class Pane extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {};
+
+    this.state = {size: this.props.initialSize};
+    console.log("init state", this.state)
   }
 
   onChange(size) {
@@ -27,10 +29,13 @@ export default class Pane extends React.Component {
 
     if (this.state.size) {
       if (direction === 'vertical') {
-        style = Object.assign(style, {width: this.state.size, display: 'flex', flex: "none"});
+        style = Object.assign(style, {width: this.state.size, display: 'flex', flex: "none", flexGrow: 0});
       } else {
-        style = Object.assign(style, {height: this.state.size, display: 'flex', flex: "none"});
+        style = Object.assign(style, {height: this.state.size, display: 'flex', flex: "none", flexGrow: 0});
       }
+    } else {
+      style = Object.assign(style, {flexGrow: 1});
+      console.log("style", style)
     }
 
     return (
@@ -46,9 +51,11 @@ export default class Pane extends React.Component {
 
 Pane.propTypes = {
   direction: React.PropTypes.string,
-  grow: React.PropTypes.number
+  grow: React.PropTypes.number,
+  initialSize: React.PropTypes.number
 };
 Pane.defaultProps = {
   direction: 'vertical',
-  grow: 1
+  grow: 1,
+  initialSize: null
 };

@@ -9,7 +9,7 @@ export default class SplitView extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {active: false};
+    this.state = {active: false, sizes: this.props.initialSizes};
     this.onMouseUp = this.onMouseUp.bind(this);
     this.createOnMouseDownWithKey = this.createOnMouseDownWithKey.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
@@ -20,7 +20,6 @@ export default class SplitView extends React.Component {
     document.addEventListener('mousemove', this.onMouseMove);
   }
 
-
   componentWillUnmount() {
     document.removeEventListener('mouseup', this.onMouseUp);
     document.removeEventListener('mousemove', this.onMouseMove);
@@ -28,17 +27,18 @@ export default class SplitView extends React.Component {
 
   render() {
     const direction = this.props.direction;
+    const initialSizes = this.props.initialSizes;
     const styles = this.stylesWithDirection(direction);
     var children = [];
 
     this.props.children.forEach((child, index) => {
       let paneId = `pane-${index}`;
-      let pane = (<Pane ref={paneId} key={paneId} direction={direction}>{child}</Pane>);
+      let pane = (<Pane ref={paneId} key={paneId} initialSize={initialSizes[index]} direction={direction}>{child}</Pane>);
       children.push(pane);
 
       if (index != this.props.children.length) {
         let dividerId = `divider-${index}`;
-        let divider = <Divider key={dividerId} direction={direction} onMouseDown={this.createOnMouseDownWithKey(paneId)} />
+        let divider = <Divider key={dividerId} direction={direction} onMouseDown={this.createOnMouseDownWithKey(paneId, index)} />
         children.push(divider);
       }
     })
@@ -50,13 +50,14 @@ export default class SplitView extends React.Component {
     )
   }
 
-  createOnMouseDownWithKey(key) {
+  createOnMouseDownWithKey(key, index) {
     return (event) => {
       const ref = this.refs[key];
       const node = ReactDOM.findDOMNode(ref);
       const position = this.props.direction === 'vertical' ? event.clientX : event.clientY;
       this.setState({
         active: true,
+        index: index,
         ref: ref,
         node: node,
         position: position
@@ -69,10 +70,24 @@ export default class SplitView extends React.Component {
       return;
     }
 
-    let minPosition = this.props.direction === 'vertical' ? this.state.node.offsetLeft : this.state.node.offsetTop;
-    let currentPosition = this.props.direction === 'vertical' ? event.clientX : event.clientY;
-    let size = currentPosition - minPosition;
+    const index = this.state.index;
+    const minPosition = this.props.direction === 'vertical' ? this.state.node.offsetLeft : this.state.node.offsetTop;
+    const currentPosition = this.props.direction === 'vertical' ? event.clientX : event.clientY;
+    const size = currentPosition - minPosition;
+    const minSize = this.props.minimumSizes[index];
+    const maxSize = this.props.maximumSizes[index];
+    if ((minSize && size < minSize) || (maxSize && size > maxSize)) {
+      console.log(index, "size", size, "min", minSize, "max", maxSize, size < minSize, size > maxSize)
+      return
+    }
+
     this.state.ref.setState({size: size});
+
+    if (this.props.onChange) {
+      let sizes = this.state.sizes ? this.state.sizes.slice(0) : [];
+      sizes[index] = size;
+      this.props.onChange(sizes);
+    }
   }
 
   onMouseUp(event) {
@@ -115,14 +130,18 @@ export default class SplitView extends React.Component {
 }
 
 SplitView.defaultProps = {
-  direction: 'vertical'
+  direction: 'vertical',
+  initialSizes: [],
+  minimumSizes: [],
+  maximumSizes: []
 };
 
 SplitView.propTypes = {
   direction: React.PropTypes.string,
-  children: (props, propName, componentName) => {
-    // TODO: A Vaildation
-  }
+  initialSizes: React.PropTypes.array,
+  minimumSizes: React.PropTypes.array,
+  maximumSizes: React.PropTypes.array,
+  onChange: React.PropTypes.func
 };
 
 SplitView.Divider = Divider;
