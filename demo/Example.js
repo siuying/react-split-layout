@@ -6,12 +6,15 @@ class Example extends React.Component {
   render() {
     return (
       <SplitView>
-        <SplitView.Pane>
-          <div><h1>Hello</h1></div>
-        </SplitView.Pane>
-        <SplitView.Pane grow={1}>
-          <div><h1>World</h1></div>
-        </SplitView.Pane>
+        <div><h1>Hello</h1></div>
+        <div><h1>World</h1></div>
+        <div><h1>Foo</h1></div>
+        <SplitView direction="horizontal">
+          <div><h1>Vertical 1</h1></div>
+          <div><h1>Vertical 2</h1></div>
+          <div><h1>Vertical 3</h1></div>
+          <div><h1>Vertical 4</h1></div>
+        </SplitView>
       </SplitView>
     );
   }

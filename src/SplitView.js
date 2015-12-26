@@ -8,19 +8,41 @@ import { Directions } from './Constants';
 export default class SplitView extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {active: false, resized: false, positions: []}
+
+    this.state = {active: false};
+    this.onMouseUp = this.onMouseUp.bind(this);
+    this.createOnMouseDownWithKey = this.createOnMouseDownWithKey.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('mouseup', this.onMouseUp);
+    document.addEventListener('mousemove', this.onMouseMove);
+  }
+
+
+  componentWillUnmount() {
+    document.removeEventListener('mouseup', this.onMouseUp);
+    document.removeEventListener('mousemove', this.onMouseMove);
   }
 
   render() {
     const direction = this.props.direction;
-    var children = this.props.children;
     const styles = this.stylesWithDirection(direction);
+    var children = [];
 
-    for (var i = children.length - 1; i > 0; i--) {
-      children.splice(i, 0, (
-        <Divider key={`divider-${i}`} direction={direction}/>
-      ))
-    }
+    this.props.children.forEach((child, index) => {
+      let paneId = `pane-${index}`;
+      let pane = (<Pane ref={paneId} key={paneId} direction={direction}>{child}</Pane>);
+      children.push(pane);
+
+      if (index != this.props.children.length) {
+        let dividerId = `divider-${index}`;
+        let divider = <Divider key={dividerId} direction={direction} onMouseDown={this.createOnMouseDownWithKey(paneId)} />
+        children.push(divider);
+      }
+    })
+
     return (
       <div style={styles}>
         {children}
@@ -28,14 +50,45 @@ export default class SplitView extends React.Component {
     )
   }
 
+  createOnMouseDownWithKey(key) {
+    return (event) => {
+      const ref = this.refs[key];
+      const node = ReactDOM.findDOMNode(ref);
+      const position = this.props.direction === 'vertical' ? event.clientX : event.clientY;
+      this.setState({
+        active: true,
+        ref: ref,
+        node: node,
+        position: position
+      });
+    }
+  }
+
+  onMouseMove(event) {
+    if (!this.state.active || !this.state.node) {
+      return;
+    }
+
+    let minPosition = this.props.direction === 'vertical' ? this.state.node.offsetLeft : this.state.node.offsetTop;
+    let currentPosition = this.props.direction === 'vertical' ? event.clientX : event.clientY;
+    let size = currentPosition - minPosition;
+    this.state.ref.setState({size: size});
+  }
+
+  onMouseUp(event) {
+    this.setState({
+      active: false
+    });
+  }
+
   stylesWithDirection(direction) {
     let style = {
-        display: 'flex',
-        flex: 1,
-        position: 'relative',
-        outline: 'none',
-        overflow: 'hidden',
-        userSelect: 'none'
+      display: 'flex',
+      flex: 1,
+      position: 'relative',
+      outline: 'none',
+      overflow: 'hidden',
+      userSelect: 'none'
     };
 
     if (direction === 'vertical') {

@@ -1,10 +1,16 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 import { Directions } from './Constants';
 
 export default class Pane extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {};
+  }
+
+  onChange(size) {
+    this.setSize({size: size})
   }
 
   render() {
@@ -27,7 +33,13 @@ export default class Pane extends React.Component {
       }
     }
 
-    return (<div style={style}>{this.props.children}</div>)
+    return (
+      <div
+        ref={(ref) => this._pane = ref }
+        style={style}>
+        {this.props.children}
+      </div>
+    )
   }
 };
 
