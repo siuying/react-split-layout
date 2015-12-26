@@ -5,6 +5,33 @@ import Pane from './Pane';
 import Divider from './Divider';
 import { Directions } from './Constants';
 
+const styles = {
+  base: {
+    display: 'flex',
+    flex: 1,
+    position: 'relative',
+    outline: 'none',
+    overflow: 'hidden',
+    userSelect: 'none'
+  },
+  vertical: {
+    flexDirection: 'row',
+    height: '100%',
+    position: 'absolute',
+    left: 0,
+    right: 0
+  },
+  horizontal: {
+    flexDirection: 'column',
+    height: '100%',
+    minHeight: '100%',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    width: '100%'
+  }
+};
+
 export default class SplitView extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -97,35 +124,7 @@ export default class SplitView extends React.Component {
   }
 
   stylesWithDirection(direction) {
-    let style = {
-      display: 'flex',
-      flex: 1,
-      position: 'relative',
-      outline: 'none',
-      overflow: 'hidden',
-      userSelect: 'none'
-    };
-
-    if (direction === 'vertical') {
-      style = Object.assign(style, {
-        flexDirection: 'row',
-        height: '100%',
-        position: 'absolute',
-        left: 0,
-        right: 0
-      })
-    } else {
-      style = Object.assign(style, {
-        flexDirection: 'column',
-        height: '100%',
-        minHeight: '100%',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        width: '100%'
-      })
-    }
-    return style;
+    return Object.assign({}, styles.base, styles[direction]);
   }
 }
 
