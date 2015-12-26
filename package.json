@@ -1,6 +1,6 @@
 {
   "name": "react-split-layout",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A React component that separate two or more views with a draggable divider.",
   "main": "index.js",
   "scripts": {
