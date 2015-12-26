@@ -8,7 +8,6 @@ export default class Pane extends React.Component {
     super(props, context);
 
     this.state = {size: this.props.initialSize};
-    console.log("init state", this.state)
   }
 
   onChange(size) {
@@ -35,13 +34,10 @@ export default class Pane extends React.Component {
       }
     } else {
       style = Object.assign(style, {flexGrow: 1});
-      console.log("style", style)
     }
 
     return (
-      <div
-        ref={(ref) => this._pane = ref }
-        style={style}>
+      <div style={style}>
         {this.props.children}
       </div>
     )

@@ -104,7 +104,6 @@ export default class SplitView extends React.Component {
     const minSize = this.props.minimumSizes[index];
     const maxSize = this.props.maximumSizes[index];
     if ((minSize && size < minSize) || (maxSize && size > maxSize)) {
-      console.log(index, "size", size, "min", minSize, "max", maxSize, size < minSize, size > maxSize)
       return
     }
 
