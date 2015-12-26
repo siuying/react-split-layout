@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Directions } from './Constants';
-
 export default class Pane extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -15,9 +13,18 @@ export default class Pane extends React.Component {
   }
 
   render() {
+    const style = this.getCurrentStyle();
+    return (
+      <div style={style}>
+        {this.props.children}
+      </div>
+    )
+  }
+
+  getCurrentStyle() {
     const direction = this.props.direction;
     const grow = this.props.grow;
-
+    const size = this.state.size;
     var style = {
       flex: 1,
       position: 'relative',
@@ -25,22 +32,16 @@ export default class Pane extends React.Component {
       overflow: 'auto',
       flexGrow: grow
     }
-
     if (this.state.size) {
       if (direction === 'vertical') {
-        style = Object.assign(style, {width: this.state.size, display: 'flex', flex: "none", flexGrow: 0});
+        style = Object.assign(style, {width: size, display: 'flex', flex: "none", flexGrow: 0});
       } else {
-        style = Object.assign(style, {height: this.state.size, display: 'flex', flex: "none", flexGrow: 0});
+        style = Object.assign(style, {height: size, display: 'flex', flex: "none", flexGrow: 0});
       }
     } else {
       style = Object.assign(style, {flexGrow: 1});
     }
-
-    return (
-      <div style={style}>
-        {this.props.children}
-      </div>
-    )
+    return style;
   }
 };
 

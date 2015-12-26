@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import Pane from './Pane';
 import Divider from './Divider';
-import { Directions } from './Constants';
 
 const styles = {
   base: {
@@ -103,10 +102,10 @@ export default class SplitView extends React.Component {
       return;
     }
 
-    const index = this.state.index;
-    const minPosition = this.props.direction === 'vertical' ? this.state.node.offsetLeft : this.state.node.offsetTop;
+    const minEdgePosition = this.props.direction === 'vertical' ? this.state.node.offsetLeft : this.state.node.offsetTop;
     const currentPosition = this.props.direction === 'vertical' ? event.clientX : event.clientY;
-    const size = currentPosition - minPosition;
+    const size = currentPosition - minEdgePosition;
+    const index = this.state.index;
     const minSize = this.props.minimumSizes[index];
     const maxSize = this.props.maximumSizes[index];
     if ((minSize && size < minSize) || (maxSize && size > maxSize)) {
@@ -130,10 +129,10 @@ export default class SplitView extends React.Component {
   styles() {
     const direction = this.props.direction;
     const draggingStyles = this.state.active ? styles.dragging : {};
-    console.log(this.state.active, draggingStyles)
     return Object.assign({}, styles.base, styles[direction], draggingStyles);
   }
 }
+
 
 SplitView.defaultProps = {
   direction: 'vertical',
@@ -142,11 +141,28 @@ SplitView.defaultProps = {
   maximumSizes: []
 };
 
+function validateNullOrNumberArray(props, propName, componentName) {
+   var content = props[propName];
+   if (content === null) {
+     return null;
+   }
+
+   if (!Array.isArray(content)) {
+     return new Error(`${componentName}.${propName} should be null or array of numbers, given: ${content}`);
+   }
+   function IsNumeric(data){
+       return typeof data == "number";
+   }
+   if (content.some((e) => (e != null && !IsNumeric(e)))) {
+     return new Error(`${componentName}.${propName} should be null or array of numbers, given: ${content}`);
+   }
+}
+
 SplitView.propTypes = {
   direction: React.PropTypes.string,
-  initialSizes: React.PropTypes.array,
-  minimumSizes: React.PropTypes.array,
-  maximumSizes: React.PropTypes.array,
+  initialSizes: validateNullOrNumberArray,
+  minimumSizes: validateNullOrNumberArray,
+  maximumSizes: validateNullOrNumberArray,
   onChange: React.PropTypes.func
 };
 
