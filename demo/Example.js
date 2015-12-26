@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SplitView from '../lib/SplitView';
+import SplitLayout from '../lib/SplitLayout';
 
 class Example extends React.Component {
   render() {
     return (
-      <SplitView
+      <SplitLayout
         onChange={this.onChange}
         initialSizes={[100, 300, 100, null]}
         minimumSizes={[100, 100, 100, 100]}
@@ -13,15 +13,15 @@ class Example extends React.Component {
         <div><h1>Hello</h1></div>
         <div><h1>World</h1></div>
         <div><h1>Foo</h1></div>
-        <SplitView
+        <SplitLayout
           direction="horizontal"
           initialSizes={[50,50,null]}
           onChange={this.onChange}>
           <div><h1>Vertical 1</h1></div>
           <div><h1>Vertical 2</h1></div>
           <div><h1>Vertical 3</h1></div>
-        </SplitView>
-      </SplitView>
+        </SplitLayout>
+      </SplitLayout>
     );
   }
 

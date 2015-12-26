@@ -37,7 +37,7 @@ const styles = {
   }
 };
 
-export default class SplitView extends React.Component {
+export default class SplitLayout extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -134,7 +134,7 @@ export default class SplitView extends React.Component {
 }
 
 
-SplitView.defaultProps = {
+SplitLayout.defaultProps = {
   direction: 'vertical',
   initialSizes: [],
   minimumSizes: [],
@@ -158,7 +158,7 @@ function validateNullOrNumberArray(props, propName, componentName) {
    }
 }
 
-SplitView.propTypes = {
+SplitLayout.propTypes = {
   direction: React.PropTypes.string,
   initialSizes: validateNullOrNumberArray,
   minimumSizes: validateNullOrNumberArray,
@@ -166,5 +166,5 @@ SplitView.propTypes = {
   onChange: React.PropTypes.func
 };
 
-SplitView.Divider = Divider;
-SplitView.Pane = Pane;
+SplitLayout.Divider = Divider;
+SplitLayout.Pane = Pane;
