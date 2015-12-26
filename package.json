@@ -9,10 +9,8 @@
     "prepublish": "npm run compile",
     "test": "npm run compile && mochify -R spec",
     "test:watch": "npm run compile:watch & mochify -R spec --watch",
-    "test:coverage": "node cover.js && cat lcov.info | coveralls && rm lcov.info",
     "demo": "npm run compile && browserify demo/Example.js -d -t -o demo/bundle.js",
     "demo:watch": "npm run compile:watch & watchify demo/Example.js -d -t -o demo/bundle.js",
-    "demo:publish": "npm run compile && browserify demo/Example.js -d -t -o demo/bundle.js && surge demo zonked-knife.surge.sh",
     "release:patch": "npm test && npm run compile && npm version patch && git push && npm publish"
   },
   "author": "Francis Chong <francis@ignition.hk> (http://reality.hk/)",
