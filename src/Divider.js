@@ -28,7 +28,7 @@ const styles = {
     margin: "-5px 0",
     borderTop: "5px solid rgba(255, 255, 255, 0)",
     borderBottom: "5px solid rgba(255, 255, 255, 0)",
-    custor: "row-resize",
+    cursor: "row-resize",
     width: "100%",
 
     ':hover': {
@@ -43,7 +43,7 @@ const styles = {
     margin: "0 -5px",
     borderLeft: "5px solid rgba(255, 255, 255, 0)",
     borderRight: "5px solid rgba(255, 255, 255, 0)",
-    custor: "col-resize",
+    cursor: "col-resize",
     height: "100%",
 
     ':hover': {

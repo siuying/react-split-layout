@@ -21,7 +21,6 @@ export default class SplitView extends React.Component {
         <Divider key={`divider-${i}`} direction={direction}/>
       ))
     }
-    console.log(children)
     return (
       <div style={styles}>
         {children}
