@@ -1,6 +1,6 @@
 {
   "name": "react-split-view",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A split view component for React, shows two or more subviews, separated by a draggable divider.",
   "main": "index.js",
   "scripts": {
@@ -43,6 +43,8 @@
       "react",
       "es2015"
     ],
-    "plugins": ["syntax-decorators"]
+    "plugins": [
+      "syntax-decorators"
+    ]
   }
 }
