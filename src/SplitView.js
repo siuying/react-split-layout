@@ -29,6 +29,12 @@ const styles = {
     top: 0,
     bottom: 0,
     width: '100%'
+  },
+  dragging: {
+    WebkitUserSelect: 'none',
+    MozUserSelect: 'none',
+    MsUserSelect: 'none',
+    userSelect: 'none',
   }
 };
 
@@ -55,7 +61,7 @@ export default class SplitView extends React.Component {
   render() {
     const direction = this.props.direction;
     const initialSizes = this.props.initialSizes;
-    const styles = this.stylesWithDirection(direction);
+    const styles = this.styles();
     var children = [];
 
     this.props.children.forEach((child, index) => {
@@ -63,7 +69,7 @@ export default class SplitView extends React.Component {
       let pane = (<Pane ref={paneId} key={paneId} initialSize={initialSizes[index]} direction={direction}>{child}</Pane>);
       children.push(pane);
 
-      if (index != this.props.children.length) {
+      if (index != this.props.children.length - 1) {
         let dividerId = `divider-${index}`;
         let divider = <Divider key={dividerId} direction={direction} onMouseDown={this.createOnMouseDownWithKey(paneId, index)} />
         children.push(divider);
@@ -106,7 +112,6 @@ export default class SplitView extends React.Component {
     if ((minSize && size < minSize) || (maxSize && size > maxSize)) {
       return
     }
-
     this.state.ref.setState({size: size});
 
     if (this.props.onChange) {
@@ -122,8 +127,11 @@ export default class SplitView extends React.Component {
     });
   }
 
-  stylesWithDirection(direction) {
-    return Object.assign({}, styles.base, styles[direction]);
+  styles() {
+    const direction = this.props.direction;
+    const draggingStyles = this.state.active ? styles.dragging : {};
+    console.log(this.state.active, draggingStyles)
+    return Object.assign({}, styles.base, styles[direction], draggingStyles);
   }
 }
 
