@@ -1,7 +1,21 @@
 import React from 'react';
+import { StyleSheet } from 'react-look';
 import Radium from 'radium';
 
-const styles = {
+class Divider extends React.Component {
+  render() {
+    const direction = this.props.direction;
+    const style = Object.assign({}, styles.base, styles.clip, styles[direction]);
+    return (
+      <span
+        style={style}
+        onMouseDown={this.props.onMouseDown}
+        />
+    );
+  }
+}
+
+const styles = StyleSheet.create(Divider, {
   base: {
     boxSizing: 'border-box',
     WebkitBoxSizing: 'border-box',
@@ -51,20 +65,7 @@ const styles = {
       borderRight: "5px solid rgba(0, 0, 0, 0.5)",
     }
   }
-}
-
-class Divider extends React.Component {
-  render() {
-    const direction = this.props.direction;
-    const style = [styles.base, styles.clip, styles[direction]];
-    return (
-      <span
-        style={style}
-        onMouseDown={this.props.onMouseDown}
-        />
-    );
-  }
-}
+});
 
 Divider.propTypes = {
   direction: React.PropTypes.string
@@ -74,4 +75,4 @@ Divider.defaultProps = {
   direction: 'vertical'
 };
 
-export default Radium(Divider);
+export default Divider;

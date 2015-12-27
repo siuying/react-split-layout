@@ -34,6 +34,7 @@ const styles = {
     MozUserSelect: 'none',
     MsUserSelect: 'none',
     userSelect: 'none',
+    WebKitAppRegion: 'no-drag'
   }
 };
 
