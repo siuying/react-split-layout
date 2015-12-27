@@ -11,7 +11,7 @@
     "test:watch": "npm run compile:watch & mochify -R spec --watch",
     "demo": "npm run compile && browserify demo/Example.js -d -t -o demo/bundle.js",
     "demo:watch": "npm run compile:watch & watchify demo/Example.js -d -t -o demo/bundle.js",
-    "release:patch": "npm test && npm run compile && npm version patch && git push && npm publish"
+    "release:patch": "npm run compile && npm version patch && git push && npm publish"
   },
   "author": "Francis Chong <francis@ignition.hk> (http://reality.hk/)",
   "license": "MIT",

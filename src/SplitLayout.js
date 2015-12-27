@@ -117,6 +117,7 @@ export default class SplitLayout extends React.Component {
       let sizes = this.state.sizes ? this.state.sizes.slice(0) : [];
       sizes[index] = size;
       this.props.onChange(sizes);
+      this.setState({sizes: sizes});
     }
   }
 

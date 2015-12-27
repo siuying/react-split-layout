@@ -26,7 +26,8 @@ class Example extends React.Component {
   }
 
   onChange(sizes) {
-    console.log("size = ", sizes)
+    const total = sizes[0] + sizes[1]
+    console.log("size = ", sizes, total)
   }
 }
 
