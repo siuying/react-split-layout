@@ -1,10 +1,9 @@
 import React from 'react';
-import Look, { StyleSheet } from 'react-look';
 
 class Divider extends React.Component {
   render() {
     const direction = this.props.direction;
-    const style = Object.assign({}, styles.base, styles.clip, styles[direction]);
+    const style = Object.assign({}, styles.base, styles[direction]);
     return (
       <span
         style={style}
@@ -14,7 +13,7 @@ class Divider extends React.Component {
   }
 }
 
-const styles = StyleSheet.create(Divider, {
+const styles = {
   base: {
     boxSizing: 'border-box',
     WebkitBoxSizing: 'border-box',
@@ -24,15 +23,8 @@ const styles = StyleSheet.create(Divider, {
     opacity: 0.2,
     zIndex: 1,
 
-    ':hover': {
-      transition: "all 2s ease",
-      webKitTransition: "all 2s ease"
-    }
-  },
-
-  clip: {
     WebkitBackgroundClip: "padding-box",
-    MozBackgroundClip: "padding-box",
+    MozBackgroundClip: "padding-box"
   },
 
   horizontal: {
@@ -42,12 +34,7 @@ const styles = StyleSheet.create(Divider, {
     borderTop: "5px solid rgba(255, 255, 255, 0)",
     borderBottom: "5px solid rgba(255, 255, 255, 0)",
     cursor: "row-resize",
-    width: "100%",
-
-    ':hover': {
-      borderTop: "5px solid rgba(0, 0, 0, 0.5)",
-      borderBottom: "5px solid rgba(0, 0, 0, 0.5)",
-    }
+    width: "100%"
   },
 
   vertical: {
@@ -57,14 +44,9 @@ const styles = StyleSheet.create(Divider, {
     borderLeft: "5px solid rgba(255, 255, 255, 0)",
     borderRight: "5px solid rgba(255, 255, 255, 0)",
     cursor: "col-resize",
-    height: "100%",
-
-    ':hover': {
-      borderLeft: "5px solid rgba(0, 0, 0, 0.5)",
-      borderRight: "5px solid rgba(0, 0, 0, 0.5)",
-    }
+    height: "100%"
   }
-});
+};
 
 Divider.propTypes = {
   direction: React.PropTypes.string
@@ -74,4 +56,4 @@ Divider.defaultProps = {
   direction: 'vertical'
 };
 
-export default Look(Divider);
+export default Divider;

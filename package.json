@@ -16,8 +16,7 @@
   "author": "Francis Chong <francis@ignition.hk> (http://reality.hk/)",
   "license": "MIT",
   "dependencies": {
-    "invariant": "^2.2.0",
-    "react-look": "^0.7.0"
+    "invariant": "^2.2.0"
   },
   "peerDependencies": {
     "react": ">=0.14.0",
