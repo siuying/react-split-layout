@@ -24,8 +24,8 @@ on minimum/maximum sizes:
   direction="vertical"
   onChange={this.onChange}
   initialSizes={[100, 300, 100, null]}
-  minimumSizes={[100, 100, 100, 100]}
-  maximumSizes={[null, null, 600, null]}>
+  minSizes={[100, 100, 100, 100]}
+  maxSizes={[null, null, 600, null]}>
   <div><h1>Hello</h1></div>
   <div><h1>World</h1></div>
   <div><h1>Foo</h1></div>

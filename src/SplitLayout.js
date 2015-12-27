@@ -106,8 +106,8 @@ export default class SplitLayout extends React.Component {
     const currentPosition = this.props.direction === 'vertical' ? event.clientX : event.clientY;
     const size = currentPosition - minEdgePosition;
     const index = this.state.index;
-    const minSize = this.props.minimumSizes[index];
-    const maxSize = this.props.maximumSizes[index];
+    const minSize = this.props.minSizes[index];
+    const maxSize = this.props.maxSizes[index];
     if ((minSize && size < minSize) || (maxSize && size > maxSize)) {
       return
     }
@@ -138,8 +138,8 @@ export default class SplitLayout extends React.Component {
 SplitLayout.defaultProps = {
   direction: 'vertical',
   initialSizes: [],
-  minimumSizes: [],
-  maximumSizes: []
+  minSizes: [],
+  maxSizes: []
 };
 
 function validateNullOrNumberArray(props, propName, componentName) {
@@ -162,8 +162,8 @@ function validateNullOrNumberArray(props, propName, componentName) {
 SplitLayout.propTypes = {
   direction: React.PropTypes.string,
   initialSizes: validateNullOrNumberArray,
-  minimumSizes: validateNullOrNumberArray,
-  maximumSizes: validateNullOrNumberArray,
+  minSizes: validateNullOrNumberArray,
+  maxSizes: validateNullOrNumberArray,
   onChange: React.PropTypes.func
 };
 

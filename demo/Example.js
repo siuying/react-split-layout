@@ -8,8 +8,8 @@ class Example extends React.Component {
       <SplitLayout
         onChange={this.onChange}
         initialSizes={[100, 300, 100, null]}
-        minimumSizes={[100, 100, 100, 100]}
-        maximumSizes={[null, null, 600, null]}>
+        minSizes={[100, 100, 100, 100]}
+        maxSizes={[null, null, 600, null]}>
         <div><h1>Hello</h1></div>
         <div><h1>World</h1></div>
         <div><h1>Foo</h1></div>
@@ -26,8 +26,7 @@ class Example extends React.Component {
   }
 
   onChange(sizes) {
-    const total = sizes[0] + sizes[1]
-    console.log("size = ", sizes, total)
+    console.log("size = ", sizes)
   }
 }
 
