@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-look';
-import Radium from 'radium';
+import Look, { StyleSheet } from 'react-look';
 
 class Divider extends React.Component {
   render() {
@@ -75,4 +74,4 @@ Divider.defaultProps = {
   direction: 'vertical'
 };
 
-export default Divider;
+export default Look(Divider);
