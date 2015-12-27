@@ -3,7 +3,8 @@ import React from 'react';
 class Divider extends React.Component {
   render() {
     const direction = this.props.direction;
-    const style = Object.assign({}, styles.base, styles[direction]);
+    const color = this.props.color;
+    const style = Object.assign({}, styles.base, styles[direction], {background: styles.base.background + " " + color});
     return (
       <span
         style={style}
@@ -18,7 +19,7 @@ const styles = {
     boxSizing: 'border-box',
     WebkitBoxSizing: 'border-box',
     MozBoxSizing: 'border-box',
-    background: "#000 padding-box",
+    background: "padding-box",
 
     opacity: 0.2,
     zIndex: 1,
@@ -49,11 +50,13 @@ const styles = {
 };
 
 Divider.propTypes = {
-  direction: React.PropTypes.string
+  direction: React.PropTypes.string,
+  color: React.PropTypes.string
 };
 
 Divider.defaultProps = {
-  direction: 'vertical'
+  direction: 'vertical',
+  color: "rgba(128, 128, 128, 1)"
 };
 
 export default Divider;

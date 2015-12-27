@@ -9,7 +9,8 @@ class Example extends React.Component {
         onChange={this.onChange}
         initialSizes={[100, 300, 100, null]}
         minSizes={[100, 100, 100, 100]}
-        maxSizes={[null, null, 600, null]}>
+        maxSizes={[null, null, 600, null]}
+        dividerColor="#000">
         <div><h1>Hello</h1></div>
         <div><h1>World</h1></div>
         <div><h1>Foo</h1></div>

@@ -71,7 +71,11 @@ export default class SplitLayout extends React.Component {
 
       if (index != this.props.children.length - 1) {
         let dividerId = `divider-${index}`;
-        let divider = <Divider key={dividerId} direction={direction} onMouseDown={this.createOnMouseDownWithKey(paneId, index)} />
+        let divider = <Divider
+          key={dividerId}
+          color={this.props.dividerColor}
+          direction={direction}
+          onMouseDown={this.createOnMouseDownWithKey(paneId, index)} />
         children.push(divider);
       }
     })
@@ -135,14 +139,6 @@ export default class SplitLayout extends React.Component {
   }
 }
 
-
-SplitLayout.defaultProps = {
-  direction: 'vertical',
-  initialSizes: [],
-  minSizes: [],
-  maxSizes: []
-};
-
 function validateNullOrNumberArray(props, propName, componentName) {
    var content = props[propName];
    if (content === null) {
@@ -162,11 +158,17 @@ function validateNullOrNumberArray(props, propName, componentName) {
 
 SplitLayout.propTypes = {
   direction: React.PropTypes.string,
+  dividerColor: React.PropTypes.string,
   initialSizes: validateNullOrNumberArray,
   minSizes: validateNullOrNumberArray,
   maxSizes: validateNullOrNumberArray,
   onChange: React.PropTypes.func
 };
 
-SplitLayout.Divider = Divider;
-SplitLayout.Pane = Pane;
+SplitLayout.defaultProps = {
+  direction: 'vertical',
+  dividerColor: 'rgba(128, 128, 128, 1)',
+  initialSizes: [],
+  minSizes: [],
+  maxSizes: []
+};
