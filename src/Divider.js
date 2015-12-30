@@ -4,7 +4,7 @@ class Divider extends React.Component {
   render() {
     const direction = this.props.direction;
     const color = this.props.color;
-    const style = Object.assign({}, styles.base, styles[direction], {background: styles.base.background + " " + color});
+    const style = Object.assign({}, styles.base, styles[direction], {background: styles.base.background + " " + color}, this.props.style);
     return (
       <span
         style={style}

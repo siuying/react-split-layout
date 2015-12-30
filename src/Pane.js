@@ -29,17 +29,16 @@ export default class Pane extends React.Component {
       flex: 1,
       position: 'relative',
       outline: 'none',
-      overflow: 'auto',
       flexGrow: grow
-    }
+    };
     if (this.state.size) {
       if (direction === 'vertical') {
-        style = Object.assign(style, {width: size, display: 'flex', flex: "none", flexGrow: 0});
+        style = Object.assign(style, {width: size, display: 'flex', flex: "none", flexGrow: 0}, this.props.style);
       } else {
-        style = Object.assign(style, {height: size, display: 'flex', flex: "none", flexGrow: 0});
+        style = Object.assign(style, {height: size, display: 'flex', flex: "none", flexGrow: 0}, this.props.style);
       }
     } else {
-      style = Object.assign(style, {flexGrow: 1});
+      style = Object.assign(style, {flexGrow: 1}, this.props.style);
     }
     return style;
   }

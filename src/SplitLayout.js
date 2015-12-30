@@ -66,7 +66,16 @@ export default class SplitLayout extends React.Component {
 
     this.props.children.forEach((child, index) => {
       let paneId = `pane-${index}`;
-      let pane = (<Pane ref={paneId} key={paneId} initialSize={initialSizes[index]} direction={direction}>{child}</Pane>);
+      let pane = (
+        <Pane
+          ref={paneId}
+          key={paneId}
+          style={this.props.paneStyle}
+          initialSize={initialSizes[index]}
+          direction={direction}>
+          {child}
+        </Pane>
+      );
       children.push(pane);
 
       if (index != this.props.children.length - 1) {
@@ -74,6 +83,7 @@ export default class SplitLayout extends React.Component {
         let divider = <Divider
           key={dividerId}
           color={this.props.dividerColor}
+          style={this.props.dividerStyle}
           direction={direction}
           onMouseDown={this.createOnMouseDownWithKey(paneId, index)} />
         children.push(divider);
@@ -135,7 +145,7 @@ export default class SplitLayout extends React.Component {
   styles() {
     const direction = this.props.direction;
     const draggingStyles = this.state.active ? styles.dragging : {};
-    return Object.assign({}, styles.base, styles[direction], draggingStyles);
+    return Object.assign({}, styles.base, styles[direction], draggingStyles, this.props.style);
   }
 }
 
@@ -159,6 +169,9 @@ function validateNullOrNumberArray(props, propName, componentName) {
 SplitLayout.propTypes = {
   direction: React.PropTypes.string,
   dividerColor: React.PropTypes.string,
+  style: React.PropTypes.object,
+  paneStyle: React.PropTypes.object,
+  dividerStyle: React.PropTypes.object,
   initialSizes: validateNullOrNumberArray,
   minSizes: validateNullOrNumberArray,
   maxSizes: validateNullOrNumberArray,
