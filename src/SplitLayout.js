@@ -117,7 +117,8 @@ export default class SplitLayout extends React.Component {
       return;
     }
 
-    const minEdgePosition = this.props.direction === 'vertical' ? this.state.node.offsetLeft : this.state.node.offsetTop;
+    var boundingClientOffset = this.state.node.getBoundingClientRect();
+    var minEdgePosition = this.props.direction === 'vertical' ? boundingClientOffset.left : boundingClientOffset.top;
     const currentPosition = this.props.direction === 'vertical' ? event.clientX : event.clientY;
     const size = currentPosition - minEdgePosition;
     const index = this.state.index;
